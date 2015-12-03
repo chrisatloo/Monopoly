@@ -1,14 +1,15 @@
 #include <iostream>
 
+#include "controller.h"
+
 
 using namespace std;
 
 int main (int argc, char const *argv[]) {
-	cout << "BB7K" << endl;
 
 
-
-
+	Controller ctrl;
+	ctrl.init(); 
 
 
 }

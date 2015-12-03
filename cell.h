@@ -18,8 +18,13 @@ public:
 
 	// modify string player and setters
 	std::string addPlayer(char);
+	std::string removePlayer(char);
 
 	// conditionals 
+
+
+	// other helper functions
+	void removeCharsFromString( std::string &, char*);
 
 protected:
 	std::string player;
