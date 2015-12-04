@@ -8,9 +8,8 @@ Player::~Player() {
 }
 
 // getters and setters
-int Player::addCash(int toadd) {
+void Player::addCash(int toadd) {
 	cash += toadd;
-	return cash;
 }
 
 int Player::getCash() {
@@ -33,7 +32,7 @@ std::string Player::getName() {
 	return name;
 }
 
-void Player::setName(string toset)  {
+void Player::setName(std::string toset)  {
 	name = toset;
 }
 
@@ -41,11 +40,11 @@ void Player::setSymbol(char sym) {
 	symbol = sym;
 }
 
-void Player::setBankruptcy(bool whetherbankrupt) {
+void Player::setBankrupcy(bool whetherbankrupt) {
 	bankrupcy = whetherbankrupt;
 }
 
-bool Player::isBankrupted {
+bool Player::isBankrupted() {
 	return bankrupcy;
 }
 

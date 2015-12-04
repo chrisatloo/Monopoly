@@ -3,17 +3,22 @@
 
 #include <string>
 #include <iostream>
+#include <cstring>
+#include <sstream>
+#include <algorithm>
 
+//class Game;
 class Cell
 {
 public:
-	// constructor and destructor ( pure virtual )
+	// constructor and destructor 
 	Cell();
-	virtual ~Cell() = 0;
+	Cell(std::string, int);
+	virtual ~Cell();
 
 	// getters
-	std::string getPlayer(int);
-	int getIndex();
+	std::string getPlayer();
+	//int getIndex();
 	int getImpr();
 
 	// modify string player and setters
@@ -24,11 +29,12 @@ public:
 
 
 	// other helper functions
-	void removeCharsFromString( std::string &, char*);
+	//void removeCharsFromString( std::string &, char*);
 
-protected:
+// fields
 	std::string player;
-	int impr, index;	
+	int index, impr;	
+
 };
 
 

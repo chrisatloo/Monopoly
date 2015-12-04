@@ -1,20 +1,22 @@
 #ifndef ACADBUILDING_H
 #define ACADBUILDING_H
 
-class AcadBuilding
+#include "properties.h"
+
+
+class AcadBuilding: public Properties
 {
 public:
-	AcadBuilding();
+	AcadBuilding(std::string, int, int , const int*);
 	~AcadBuilding();
-	std::string getName();
-	int getIndex();
-	int getCost();  // only getter, cost once initialised is set
-	int getFee();
+	int getCostImpr();  // only getter, cost once initialised is set
+	int getRent(int);
 	void setFee(int);
 
 // field
-	std::string name;
-	int index, cost, fee, impr;
+	int *rent; // array of value
+	int costImpr;
+
 
 };
 

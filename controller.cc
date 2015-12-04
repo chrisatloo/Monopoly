@@ -1,16 +1,26 @@
-d
-
 #include "controller.h"
 
+#include <iostream>
+#include <string>
 using namespace std;
 
 
-Controller::controller() : board(NULL) {
+Controller::Controller() :
+	board(NULL) {
+	game = new Game();
 
 }
 
+void Controller::setNumPlayer(int num) {
+	numPlayer = num;
+}
 
-Controller::init() {
+
+
+void Controller::init() {
+
+	Board* b = new Board();
+	board = b;
 	// welcoming line
 	cout << "        _________________________________________" << endl;
 	cout << "        |                                       |" << endl;
@@ -21,10 +31,11 @@ Controller::init() {
 	cout << "        |  ####  ####  #      ###   ###   ###   |" << endl;
 	cout << "        |_______________________________________|" << endl;
 
-	cout << endl << endl << "Enter 'help' for list of command to play with!";
+	cout << endl << endl << "Enter 'help' for list of command to play with! (not wokring now)" << endl;;
 
 
 	// init symbols
+	symbols = new char[8];
 	symbols[0] = 'G'; // "Goose"
 	symbols[1] = 'B'; // "GRT BUS"
 	symbols[2] = 'D'; // "Tim Hortons Doughnut"
@@ -45,7 +56,6 @@ Controller::init() {
 	Player* p8;
 	*/
 
-	Board* board = new Board;
 
 	//starting, creating save file NOOOOOO
 	/*
@@ -59,7 +69,7 @@ Controller::init() {
 
 	char numPlayer_temp;
 	while (cin >> numPlayer_temp ) {
-		if ( numPlayer_temp - '6' <= 2 && numPlayer_temp - '6' >= 0) {
+		if ( numPlayer_temp <= '8' && numPlayer_temp >= '6') {
 			numPlayer = numPlayer_temp - '0';
 			break;
 		} else {
@@ -75,13 +85,11 @@ Controller::init() {
 	// set player profiles
 	string name_temp;
 	char symbol_temp;
-	for ( int i = 0; i <= numPlayer; ++i) {
+	for ( int i = 0; i < numPlayer; ++i) {
 
 		// name
-		cout << "Hi player" << (i + 1) << "What is your name? " << endl;
-		while ( cin >> name_temp) {
-
-		}
+		cout << "Hi player" << (i + 1) << ", What is your name? " << endl;
+		cin >> name_temp;
 
 		// symbol: show option
 		cout << "Okay, " << name_temp << " , what symbol would you like to use?" << endl;
@@ -94,16 +102,16 @@ Controller::init() {
 		cout << endl << endl << "Please choose from following available symbols: ";
 
 		// print available options
-		for (int i = 0; i < numPlayer; i++) {
+		for (int i = 0; i < 8; i++) {
 			if (symbols[i] == NULL) continue;
 			cout << symbols[i] << " | ";
 		}
-		cout << endl << endl;
+		cout << endl;
 
 		// record symbol
 		while ( cin >> symbol_temp) {
 			bool symbolnotvalid = true;
-			for ( int j = 0; j < numPlayer; j++) {
+			for ( int j = 0; j < 8; j++) {
 				if (symbols[j] == symbol_temp) { // set chosen symbol to NULL
 					symbols[j] = NULL;
 					symbolnotvalid = false;
@@ -112,32 +120,31 @@ Controller::init() {
 			}
 
 			if (symbolnotvalid) {
-				cout << "Please input a valid symbol listed above!" << endl;
+				cout << "Oops! Symbol not valid or is already taken!" << endl;
+				continue;
 			}
 
 			// if doesn't exist in mapPlayer, create one
 			if (mapPlayers.find(symbol_temp) == mapPlayers.end()) {
 				mapPlayers[symbol_temp] = name_temp;
 				break;
-			} else {
-				cout << "Someone else has already taken the symbol! Please select from: ";
-				for (int i = 0; i < numPlayer; i++) {
-					if (symbols[i] == NULL) continue;
-					cout << symbols[i] << " | ";
-				}
 			}
+
+
+
 		}
 
 		// add player
 		game->addPlayer(i, name_temp, symbol_temp, 0, 0, 1500);
+		board->cells[0].addPlayer(symbol_temp);
 
 #ifdef DEBUG
 		cout << "Player " << (i + 1) << ", You are now " << symmbol_temp << endl;
 #endif
 	}
 
-
- game->addCell()
+	board->printBoard();
+//game->addCell()
 
 
 }
@@ -167,5 +174,7 @@ void Controller::help() {
 
 
 Controller::~Controller() {
+	delete[] symbols;
 	delete board;
+
 }

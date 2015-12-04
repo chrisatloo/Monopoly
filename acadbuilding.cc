@@ -5,30 +5,22 @@
 using namespace std;
 
 
-AcadBuilding::AcadBuilding() {
-
+AcadBuilding::AcadBuilding(string name, int cost, int costImpr, const int rentCharge[6]):
+	Properties(name, cost), costImpr(costImpr) {
+	for (int i = 0; i < 6; i++) { //deep copy
+		rent[i] = rentCharge[i];
+	}
 }
 
 AcadBuilding::~AcadBuilding() {
-
+	delete [] rent;
 }
 
-std::string AcadBuilding::getName() {
-	return name;
+int AcadBuilding::getCostImpr() {
+	return costImpr;
+} 
+
+int AcadBuilding::getRent(int impr) {
+	return rent[impr];
 }
 
-int AcadBuliding::getIndex() {
-	return index;
-}
-
-int AcadBulding::getCost() {
-	return cost;
-}
-
-int AcadBuilding::getFee() {
-	return fee;
-}
-
-void AcadBuliding::setFee(int f) {
-	fee = f;
-}

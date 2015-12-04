@@ -12,12 +12,15 @@
 #include "board.h"
 #include "dice.h"
 #include "cell.h"
+#include "game.h"
 
+class Game;
 class Controller
 {
 public:
 	Controller();
 	~Controller();
+	void setNumPlayer(int);
 	void init();
 	Board *getBoard(); //for display board
 
@@ -27,8 +30,10 @@ public:
 
 private:
 	Board* board;
-	map<char, string> mapPlayers;
+	Game* game;
+	std::map<char, std::string> mapPlayers;
 	int numPlayer;
+	char *symbols;
 
 	
 	//std::string savedfile;

@@ -2,6 +2,7 @@
 #define DICE_H
 
 #include <cstdlib>
+#include <ctime> 
 
 class Dice
  {

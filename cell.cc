@@ -1,11 +1,15 @@
-#include <string>
-#include <iostream>
+#include "cell.h"
+
+
 using namespace std;
 
-Cell::Cell(string player, int index, int impr = 0):
-	player(player), index(index), impr(impr) {};
+Cell::Cell() {};
 
-string Cell::getPlayer(int cell) {
+Cell::Cell(string player, int impr = 0):
+	player(player), impr(impr) {};
+
+
+string Cell::getPlayer() {
 	return player;
 }
 
@@ -15,23 +19,29 @@ string Cell::addPlayer(char sym) {
 }
 
 string Cell::removePlayer(char sym) {
-	removeCharsFromString(player, sym);
+	int pos = player.find(sym);
+	if (pos != string::npos) player.erase(pos, 1);
 	return player;
 }
 
-void removeCharsFromString( string &str, char* charsToRemove ) {
+
+int Cell::getImpr() {
+	return impr;
+}
+
+Cell::~Cell() {}
+
+/*
+void removeCharsFromString( string &str, char *charsToRemove ) {
    for ( unsigned int i = 0; i < strlen(charsToRemove); ++i ) {
       str.erase( remove(str.begin(), str.end(), charsToRemove[i]), str.end() );
    }
 }
 
 
+
 int getIndex() {
 	return index;
 }
-
-int getImpr() {
-	return impr;
-}
-
+*/
 

@@ -6,17 +6,22 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 #include "cell.h"
 
-class Board {
-protected:
-	Cell cells[40];
 
-public:
+struct Board {
+
+	Cell cells[40]; // ptr to array of ptr to cell
+
+
 	Board();
 	~Board();
+	//int rollDice(); 
 	void notify();
+	std::string printImpr(int);
 	void printBoard();
 
 
